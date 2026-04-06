@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trivago Smart Planner — MCP Powered</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="header-text">
+        <h1 class="header-title">Trivago smart planner</h1>
+        <p class="header-sub">AI-powered hotel search with trust-scored recommendations</p>
+        <span class="mcp-badge">Trivago MCP · Claude API</span>
+      </div>
+    </div>
+
+    <!-- Structured search form -->
+    <div class="card">
+      <div class="grid-2">
+        <div>
+          <label for="dest">Destination</label>
+          <input type="text" id="dest" placeholder="e.g. Paris, Berlin…" value="Berlin" />
+        </div>
+        <div>
+          <label for="guests">Guests</label>
+          <select id="guests">
+            <option>1 adult</option>
+            <option selected>2 adults</option>
+            <option>2 adults, 1 child</option>
+            <option>2 adults, 2 children</option>
+            <option>4 adults</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div>
+          <label for="checkin">Check-in</label>
+          <input type="date" id="checkin" />
+        </div>
+        <div>
+          <label for="checkout">Check-out</label>
+          <input type="date" id="checkout" />
+        </div>
+        <div>
+          <label for="sortby">Sort by</label>
+          <select id="sortby">
+            <option>Best match</option>
+            <option>Price: low to high</option>
+            <option>Guest rating</option>
+            <option>Distance to center</option>
+          </select>
+        </div>
+      </div>
+      <p class="prefs-label">Preferences</p>
+      <div class="chips" id="chips">
+        <button type="button" class="chip" data-v="pool">Pool</button>
+        <button type="button" class="chip on" data-v="wifi">Free WiFi</button>
+        <button type="button" class="chip" data-v="breakfast">Breakfast incl.</button>
+        <button type="button" class="chip on" data-v="rating">High rating</button>
+        <button type="button" class="chip" data-v="center">City center</button>
+        <button type="button" class="chip" data-v="parking">Parking</button>
+        <button type="button" class="chip" data-v="spa">Spa</button>
+        <button type="button" class="chip" data-v="pets">Pet friendly</button>
+      </div>
+      <button type="button" class="btn-search" id="searchBtn">Search hotels via trivago MCP</button>
+    </div>
+
+    <!-- Natural language AI bar -->
+    <div class="ai-bar">
+      <textarea id="aiQuery" placeholder="Ask anything… 'Romantic hotel near museums in Paris for a 3-night anniversary in June'"></textarea>
+      <button type="button" class="btn-ai" id="aiBtn" aria-label="Ask AI">Ask AI ↗</button>
+    </div>
+
+    <!-- Pipeline status -->
+    <div class="pipeline" id="pipeline">
+      <span class="pip" id="p1">1 · parse intent</span>
+      <span class="pip-sep">→</span>
+      <span class="pip" id="p2">2 · trivago MCP search</span>
+      <span class="pip-sep">→</span>
+      <span class="pip" id="p3">3 · trust scoring</span>
+      <span class="pip-sep">→</span>
+      <span class="pip" id="p4">4 · ranked results</span>
+    </div>
+
+    <!-- AI narrative output -->
+    <div class="ai-out" id="aiOut">
+      <div class="ai-out-label" id="aiLabel">
+        <div class="dots"><span></span><span></span><span></span></div>
+        Thinking…
+      </div>
+      <div class="ai-out-text" id="aiText"></div>
+    </div>
+
+    <!-- Trust scores -->
+    <div class="trust" id="trustPanel">
+      <div class="trust-head">Result trust scores</div>
+      <div class="trust-row">
+        <span class="trust-lbl">Price accuracy</span>
+        <div class="trust-track"><div class="trust-fill" id="tf1" style="width:0%"></div></div>
+        <span class="trust-num" id="tn1">—</span>
+      </div>
+      <div class="trust-row">
+        <span class="trust-lbl">Rating reliability</span>
+        <div class="trust-track"><div class="trust-fill" id="tf2" style="width:0%"></div></div>
+        <span class="trust-num" id="tn2">—</span>
+      </div>
+      <div class="trust-row">
+        <span class="trust-lbl">Preference match</span>
+        <div class="trust-track"><div class="trust-fill" id="tf3" style="width:0%"></div></div>
+        <span class="trust-num" id="tn3">—</span>
+      </div>
+    </div>
+
+    <!-- Results area -->
+    <div id="resultsArea">
+      <div class="empty">
+        <div class="empty-icon">🏨</div>
+        <div class="empty-txt">Search for hotels or describe your trip above</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      Built on <a href="https://mcp.trivago.com/docs" target="_blank">trivago MCP</a> ·
+      Powered by Claude API ·
+      <a href="https://mcp.trivago.com/docs" target="_blank">mcp.trivago.com/docs</a>
+    </div>
+
+  </div>
+
+  <script type="module" src="./app.js" defer></script>
+</body>
+</html>
