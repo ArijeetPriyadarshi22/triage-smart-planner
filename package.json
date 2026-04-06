@@ -1,0 +1,11 @@
+{
+  "name": "trivago-smart-planner",
+  "version": "0.1.0",
+  "description": "Trivago Smart Planner (MCP + AI demo)",
+  "private": true,
+  "scripts": {
+    "start": "npx http-server ./src -o -c-1",
+    "serve": "npx http-server ./src -o -c-1"
+  },
+  "devDependencies": {}
+}
